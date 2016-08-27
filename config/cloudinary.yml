@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: style-cloud
+  api_key: '397185593861174'
+  api_secret: ap8oZo7LK1CA9jd6N54A6coLhpA
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: style-cloud
+  api_key: '397185593861174'
+  api_secret: ap8oZo7LK1CA9jd6N54A6coLhpA
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: style-cloud
+  api_key: '397185593861174'
+  api_secret: ap8oZo7LK1CA9jd6N54A6coLhpA
+  enhance_image_tag: true
+  static_image_support: false
