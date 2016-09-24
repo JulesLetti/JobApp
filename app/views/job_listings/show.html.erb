@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @job_listing.company_profile.contact_name%>
+</p>
+
+<p>
+  <strong>Company profiles:</strong>
+  <%= @job_listing.company_profile.company_name %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @job_listing.title %>
+</p>
+
+<p>
+  <strong>Job description:</strong>
+  <%= @job_listing.job_description %>
+</p>
+
+
+<h4>Skills</h4>
+<ul>
+  <% @job_listing.skills.each do |skill| %>
+    <li><%= skill.name %></li>
+    <% end %>
+</ul>
+
+<%= link_to 'Edit', edit_job_listing_path(@job_listing) %> |
+<%= link_to 'Back', job_listings_path %>

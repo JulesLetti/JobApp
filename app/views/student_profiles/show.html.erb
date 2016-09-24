@@ -1,0 +1,83 @@
+<div class="row">
+  <div class="col-md-6">
+   <div class="panel panel-default">
+     <div class="panel-heading">
+       <h2 class="panel-title">Student Profile</h>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6">
+          <%= cl_image_tag @student_profile.photo, class: 'img-responsive', alt: @student_profile.student_name + 'photo' %>
+        </div>
+        <div class="col-md-6">
+        <h3><%= @student_profile.student_name %></h3>
+        <p class="lead"><%= @student_profile.student_location %></p>
+      </div>
+    </div>
+    <p><strong>Contact name:</strong> <%= @student_profile.linkedin_url %></p>
+    <p><strong>Website:</strong> <%= @student_profile.website %></p>
+    <p><strong>Gibhub User Name:</strong> <%= @student_profile.github_username %></p>
+    <hr>
+    <p><strong>Student Bio</strong></p><p><% @student_profile.bio %></p>
+      <td><%= link_to '<i class="fa fa-download"></i> My CV'.html_safe, @student_profile.cv.url, class: 'btn btn-info btn-sm', target: '_blank' %></p>
+
+    <p><strong>City</strong></p><p><%= @student_profile.city %></p>
+    <% if @student_profile.user == current_user %>
+     <%= link_to 'Edit student profile',
+     edit_student_profile_path(@student_profile), class: 'btn btn-warning btn-sm' %>
+     <%end%>
+
+     <!-- Button trigger modal -->
+     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+       Add Skills
+     </button>
+     <hr>
+     <h4>My Skills</h4>
+     <ul>
+       <% @student_profile.user.skills.each do |skill| %>
+       <li><%= skill.name %></li>
+       <% end %>
+     </ul>
+   </div>
+ </div>
+ </div>
+ </div>
+
+
+     <!-- Modal -->
+     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content">
+           <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+             <h4 class="modal-title" id="myModalLabel">Add skills to my profile</h4>
+           </div>
+
+           <div class="modal-body">
+
+             <% @skill_categories.each do |category| %>
+             <p><strong><%= category.name %></strong></p>
+             <% category.skills.each do |skill| %>
+
+             <% if skill.users.include?(current_user) %>
+             <%= link_to skill.name, remove_user_from_skill_path(skill), class: 'btn btn-success btn-sm' %>
+             <% else %>
+              <%= link_to skill.name, add_user_to_skill_path(skill), class: 'btn btn-primary btn-sm' %>
+              <%end%>
+             <%end%>
+             <hr>
+             <% end %>
+
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+             <button type="button" class="btn btn-primary">Save changes</button>
+           </div>
+         </div>
+       </div>
+     </div>
+
+      </div>
+    </div>
+  </div>
+</div>

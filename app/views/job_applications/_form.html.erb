@@ -1,0 +1,16 @@
+<%= simple_form_for(@job_application) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <% if params[:job_listing] %>
+    <%= f.input :job_listing_id, as: :hidden, input_html: { value: params[:job_listing]} %>
+    <% end %>
+
+    <%= f.input :cover_letter %>
+    <%= f.input :available %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

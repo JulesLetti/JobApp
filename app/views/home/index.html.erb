@@ -1,7 +1,46 @@
-<h1>Coder Factory Job Portal</h1>
+<h1>Coder Girls</h1>
 
-<h4>powered by Jules</h4>
+<h4>Job Portal</h4>
 <br>
 <p>Find talented junior developers</p>
 
-<%= link_to "<i class='fa fa-plus'></i> List your jobs".html_safe, new_user_registration_path(user_type:'company'), class: 'btn btn-primary' %>
+<% if user_signed_in? %>
+  <p class="lead">Welcome back
+
+  <% if current_user.student_profile %>
+    <%= current_user.student_profile.student_name %>
+
+  <% elsif current_user.company_profiles.any? %>
+    <%= current_user.company_profiles.first.contact_name %>
+  <% end %>
+
+  <% if current_user.has_role? :company_rep and !current_user.company_profiles.any? %>
+    <%= link_to 'Create your company profile', new_company_profile_path, class: 'btn btn-primary btn-sm' %>
+  <% end %>
+
+
+  <% if current_user.has_role? :student %>
+  <div class="row">
+    <% @job_listings.each do |job| %>
+    <div class="col-md-4">
+      <div class="panel-body">
+        <h4><%= job.title %> <small><%= job.company_profile.company_name %></small></h4>
+        <p><%= job.job_description %></p>
+        <%= link_to 'Apply', new_job_application_path(job_listing: job), class: 'btn btn-primary btn-sm' %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  </div>
+  <% end %>
+<h3>Find companies near you</h3>
+<%= form_tag(search_company_profiles_path, method: :post) do %>
+  <%= label_tag :location %>
+  <%= text_field_tag :location %>
+  <%= submit_tag "Search" %>
+<% end %>
+
+<% else %>
+<%= link_to "<i class='fa fa-building'></i> List your jobs".html_safe, new_user_registration_path(user_type:'company'), class: 'btn btn-primary btn-lg' %>
+<%= link_to "<i class='fa fa-user'></i> Get a job".html_safe, new_user_registration_path(user_type:'student'), class: 'btn btn-success btn-lg' %>
+<% end %>

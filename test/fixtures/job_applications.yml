@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  job_listing: one
+  user: one
+  status: MyString
+  cover_letter: MyText
+  available: 2016-09-24
+
+two:
+  job_listing: two
+  user: two
+  status: MyString
+  cover_letter: MyText
+  available: 2016-09-24

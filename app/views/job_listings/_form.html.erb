@@ -1,0 +1,20 @@
+<%= simple_form_for(@job_listing) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <% if params[:company_profile] %>
+    <%= f.input :company_profile_id, input_html: { value:params[:company_profile]}, as: :hidden %>
+    <% else %>
+    <%= f.association :company_profile, collection: current_user.company_profiles, label_method: :company_name %>
+    <% end %>
+
+    <%= f.input :title %>
+    <%= f.input :job_description %>
+
+    <%= f.association :skills, as: :check_boxes, label: 'Preferred skills' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

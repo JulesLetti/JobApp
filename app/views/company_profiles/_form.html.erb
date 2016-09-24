@@ -1,22 +1,32 @@
+<div class='row'>
+    <div class='col-md-10 col-md-offset-1'>
+        <div class='panel panel-default'>
+          <div class='panel-heading'>
+            <h2 class='panel-title'>New Company Profile</h2>
+          </div>
+
+          <div class='panel-body'>
+
+
 <%= simple_form_for(@company_profile) do |f| %>
+
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :first_name %>
-    <%= f.input :last_name %>
+    <%= f.input :first_name, label: 'Enter your first name' %>
+    <%= f.input :last_name, placeholder: 'Enter your last name' %>
     <%= f.input :phone %>
     <%= f.input :company_name %>
+    <%= f.input :company_type, collection: ['Startup', 'Established Startup', 'Agency', 'Small Business', 'Other'] %>
     <%= f.input :logo %>
-    <%= f.input :description %>
+    <%= f.input :description, input_html: {rows: 5 } %>
     <%= f.input :street %>
     <%= f.input :suburb %>
     <%= f.input :postcode %>
-    <%= f.input :country %>
-    <%= f.input :latitude %>
-    <%= f.input :longitude %>
+    <%= f.input :country, priority: ['Australia', 'New Zealand'] %>
     <%= f.input :company_culture %>
-    <%= f.input :company_type %>
-    <%= f.association :user %>
+
+
   </div>
 
   <div class="form-actions">

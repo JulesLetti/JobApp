@@ -1,6 +1,11 @@
 class CompanyProfilesController < ApplicationController
   before_action :set_company_profile, only: [:show, :edit, :update, :destroy]
 
+  def search
+    @company_profiles = CompanyProfile.near(params[:location] + ", Australia")
+  end
+
+
   # GET /company_profiles
   # GET /company_profiles.json
   def index
@@ -25,7 +30,7 @@ class CompanyProfilesController < ApplicationController
   # POST /company_profiles.json
   def create
     @company_profile = CompanyProfile.new(company_profile_params)
-
+    @company_profile.user = current_user
     respond_to do |format|
       if @company_profile.save
         format.html { redirect_to @company_profile, notice: 'Company profile was successfully created.' }

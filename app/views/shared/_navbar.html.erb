@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Brand</a>
+      <a class="navbar-brand" href="/">Girly Jobs</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -40,9 +40,32 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
+
+              <% if current_user.has_role? :admin %>
+              <li><a href="/skills">Skills</a></li>
+              <li><a href="/skill_categories">Skills Category</a></li>
+              <% end %>
+
+              <% if current_user.has_role? :student and current_user.student_profile %>
+              <li><%= link_to "My Profile", student_profile_path(current_user.student_profile) %>
+              <% end %></li>
+
+              <% if current_user.has_role? :company_rep %>
+                  <% if current_user.company_profiles.any? %>
+                  <% current_user.company_profiles.each do |company| %>
+                  <li><%= link_to company.company_name, company_profile_path(company) %></li>
+                <% end %>
+
+              <% end %>
+                <li><%= link_to 'Create company profile', new_company_profile_path %></li>
+              <% end %>
+
+              <li><%= link_to 'Add job listing', new_job_listing_path %></li>
+
               <li><a href="#">Something else here</a></li>
+
+
+
               <li role="separator" class="divider"></li>
               <li><a href="#">Separated link</a></li>
             </ul>
